@@ -1,0 +1,122 @@
+ @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+ * {
+   box-sizing: border-box;
+ }
+ 
+ body {
+   font-family: "Open Sans", sans-serif;
+   font-size: 15px;
+   line-height: 1.5;
+   margin: 0;
+ }
+ 
+ ul,
+ li {
+   margin: 0;
+   padding: 0;
+   list-style: none;
+ }
+
+header div {
+   float: left;
+}
+
+header ul {
+   line-height: 40px;
+   margin-top: 45px;
+   font-size: 25px;
+   margin-left: 70px;
+ }
+ 
+ li {
+   float: left;
+   margin-right: 50px;
+ }
+ 
+ li:last-of-type {
+   margin-right: 0;
+ }
+ 
+ li a {
+   color: white;
+   text-decoration: none;
+ }
+ 
+ li a:hover {
+   color: #6fb98f;
+ }
+ 
+ header {
+   background: #021c1e;
+   height: 170px;
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   overflow: hidden;
+   transition: all .2s ease;
+ }
+ 
+ .logo {
+   color: #6fb98f;
+   font-size: 30px;
+   float: left;
+   line-height: 90px;
+ }
+ 
+ .container {
+   max-width: 1170px;
+   margin: 0 auto;
+   padding: 0 10px;
+ }
+ 
+ .container:after {
+   content: "";
+   clear: both;
+   display: block;
+ }
+ 
+ article {
+   margin-top: 190px;
+ }
+ 
+ .detay {
+   background: #f5f7fa;
+   border: 1px solid #aaa;
+   padding: 10px;
+   margin-bottom: 25px;
+   display: inline-block;
+ }
+ 
+ .detay span {
+   margin-right: 20px;
+ }
+ 
+ .fa-facebook {
+   color: #222222;
+ }
+ 
+ .fa-twitter {
+   color: #1aa9e1;
+ }
+ 
+ .fa-whatsapp {
+   color: #25d366;
+ }
+ 
+ .fa-user {
+   color: #021c1e;
+ }
+ 
+ img {
+   display: block;
+   width: 100%;
+   max-width: 600px;
+ }
+ 
+ footer {
+   background: #021c1e;
+   color: white;
+   text-align: center;
+   padding: 10px 0;
+ }

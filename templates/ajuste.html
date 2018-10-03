@@ -1,0 +1,114 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<header>
+  <div class="container">
+    <div class="logo">
+      <img style="height: 170px; width: 160px;" src="{{url_for('static', filename='logo-ime.png')}}" />
+    </div>
+    <div>
+    	<p style="color: white; text-align: center; font-size: 28px;">Seção de Engenharia Cartográfica SE/6</p>
+	    <ul>
+	      <li><a href="/">Sobre</a></li>
+	      <li><a href="/exemplo">Exemplo</a></li>
+	      <li><a href="/ajuste">Ajuste de Rede GNSS</a></li>
+	      <li><a href="/codigo">Código</a></li>
+	    </ul>
+    </div>
+  </div>
+</header>
+
+<article>
+    <div class="container">
+        <h1>Essa é a página de ajuste</h1>
+        <div>
+            <h3>Entre com o arquivo Excel (.csv) para realizarmos o cálculo</h3>
+            <form method="post" enctype="multipart/form-data">
+                <p><input type="file" name="csv_file" enctype="multipart/form-data"></p>
+                <p><input type=submit value=Upload></p>
+            </form>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <!-- Matriz das Coordenadas Ajustadas -->
+        {% if Adjusted_pairs_table != Null %}
+        <h2>Coordenadas Ajustadas</h2>
+        {% endif %}
+        {{Adjusted_pairs_table}}
+        
+        <br>
+        <br>
+        <br>
+        <!-- Teste de hipótese -->
+        {% if Teste_hipotese_aceito == True %}
+            <p style="font-weight: bold;">Não existe evidência estatística para rejeição do ajuste para o nível de significância de 5%</p>
+        {% endif %}
+        {% if Teste_hipotese_aceito == False %}
+            <p>Existe evidência estatística de presença de erros no resultado do ajuste</p>
+        {% endif %}
+
+        <br>
+        <br>
+        <br>
+        <!-- Elipses de Erro -->
+        {% if M_EdE != Null %}
+        <h2>Elipsoides de erro</h2>
+        {% for elipsoide in M_EdE %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Ponto</th>
+                    <th>X</th>
+                    <th>Y</th>
+                    <th>Z</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {% for column in elipsoide %}
+                        <td>{{column}}</td>
+                    {% endfor%}
+                </tr>
+            </tbody>
+        </table>
+        {% endfor %}
+        {% endif %}
+        <br>
+        <br>
+        <br>
+        <!-- MVC -->
+        {% if M_VC != Null %}
+        <h2>MVC dos Parâmetros Ajustados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Ponto</th>
+                    {% for i in range(0, M_VC|length) %}
+                        {% if i%3 == 0 %}
+                        <th>{{'σx' + M_VC[i][0]|string}}</th>
+                        {% endif %}
+                        {% if i%3 == 1 %}
+                        <th>{{'σy' + M_VC[i][0]|string}}</th>
+                        {% endif %}
+                        {% if i%3 == 2 %}
+                        <th>{{'σz' + M_VC[i][0]|string}}</th>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for line in M_VC %}
+                <tr>
+                    {% for column in line %}
+                    <td>{{column}}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        <br>
+        <br>
+        <br>
+    </div>
+</article>
